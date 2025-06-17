@@ -5,15 +5,15 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run build --configuration production
 
 # Etapa 2: Servir con Express
 FROM node:18
 
 WORKDIR /app
 
-# Copiar lo necesario desde la etapa de build
-COPY --from=build /app/dist/moviebook /app/dist/moviebook
+# Copiar build final
+COPY --from=build /app/dist/moviebook/browser /app/dist/moviebook/browser
 COPY server.js /app/server.js
 COPY package*.json ./
 
