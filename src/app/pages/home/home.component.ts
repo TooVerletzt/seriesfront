@@ -41,7 +41,7 @@ export class HomeComponent {
       next: data => {
         this.tweets = data.map(tweet => {
           if (tweet.imageUrl && !tweet.imageUrl.startsWith('http')) {
-            tweet.imageUrl = `http://localhost:8080${tweet.imageUrl}`;
+            tweet.imageUrl = `https://seriesbackspringboot.onrender.com${tweet.imageUrl}`;
           }
           return tweet;
         });
@@ -69,7 +69,7 @@ export class HomeComponent {
     this.tweetService.createTweet(formData).subscribe({
       next: (newTweet) => {
         if (newTweet.imageUrl && !newTweet.imageUrl.startsWith('http')) {
-          newTweet.imageUrl = `http://localhost:8080${newTweet.imageUrl}`;
+          newTweet.imageUrl = `https://seriesbackspringboot.onrender.com${newTweet.imageUrl}`;
         }
 
         const tweetExtendido: Tweet = {
@@ -96,7 +96,7 @@ export class HomeComponent {
     this.tweetService.createTweet(formData).subscribe({
       next: (newTweet) => {
         if (newTweet.imageUrl && !newTweet.imageUrl.startsWith('http')) {
-          newTweet.imageUrl = `http://localhost:8080${newTweet.imageUrl}`;
+          newTweet.imageUrl = `https://seriesbackspringboot.onrender.com${newTweet.imageUrl}`;
         }
 
         const tweetExtendido: Tweet = {
