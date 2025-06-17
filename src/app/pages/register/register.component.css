@@ -1,0 +1,6 @@
+.register-background {
+  min-height: 100vh;
+  background: url('https://wallpapers.com/images/hd/the-force-awakens-30lpueufq6zaskpy.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding: 2rem;
+}

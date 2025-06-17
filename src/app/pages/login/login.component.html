@@ -1,3 +1,5 @@
+<div class="login-background">
+
 <div class="flex justify-center items-center min-h-screen bg-indigo-50 p-4">
   <div class="card">
     <div class="card2">
@@ -23,8 +25,12 @@
         <div *ngIf="errorMessage" class="text-red-500 text-xs mt-2">{{ errorMessage }}</div>
         <div class="btn">
           <button type="button" (click)="login()" class="button1">Iniciar sesión</button>
+            <button type="button" (click)="cancelar()" class="button1 bg-red-500 hover:bg-red-600 w-full sm:w-auto">Cancelar</button>
+
         </div>
       </form>
     </div>
   </div>
+</div>
+
 </div>

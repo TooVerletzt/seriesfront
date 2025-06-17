@@ -1,0 +1,15 @@
+
+.home-background {
+  min-height: 100vh;
+  background: url('https://cloudfront-us-east-1.images.arcpublishing.com/infobae/23T7MH2WNFEBZMDWFLUISNFDGM.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding: 2rem;
+}
+.reactions-container {
+  background: rgba(255, 50, 50, 0.15); /* rojo suave y translúcido */
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}

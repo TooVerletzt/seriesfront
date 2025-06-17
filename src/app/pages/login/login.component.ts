@@ -45,4 +45,10 @@ export class LoginComponent {
   togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
+cancelar(): void {
+    this.router.navigate(['/']); // Cambia la ruta si quieres ir a otra
+  }
 }
+
+  
+
