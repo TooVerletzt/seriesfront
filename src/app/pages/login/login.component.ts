@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,11 @@ export class LoginComponent {
   errorMessage: string = '';
   showPassword: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private storageService: StorageService,
+    private router: Router
+  ) {}
 
   login(): void {
     if (!this.username || !this.password) {
@@ -20,10 +26,20 @@ export class LoginComponent {
       return;
     }
 
-    // 🚫 Ya no se usa AuthService ni token, solo redirige
-    console.log('🔓 Login simulado, redirigiendo a /home');
-    this.errorMessage = '';
-    this.router.navigate(['/home']);
+    this.authService.login(this.username, this.password).subscribe({
+      next: data => {
+        // ✅ Guardar token y username
+        this.storageService.setToken(data.accessToken);
+        this.storageService.setUser(data.username);  // o data.username
+
+        console.log('✅ Login exitoso:', data);
+        this.router.navigate(['/home']);
+      },
+      error: err => {
+        this.errorMessage = err.error?.message || 'Error al iniciar sesión.';
+        console.error(err);
+      }
+    });
   }
 
   togglePassword(): void {

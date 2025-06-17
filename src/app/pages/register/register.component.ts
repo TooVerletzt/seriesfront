@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { StorageService } from '../../services/storage.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +17,11 @@ export class RegisterComponent {
   successMessage: string = '';
   showPassword: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private storageService: StorageService,
+    private router: Router
+  ) {}
 
   register(): void {
     this.errorMessage = '';
@@ -33,9 +38,13 @@ export class RegisterComponent {
     }
 
     this.authService.register(this.username, this.email, this.password).subscribe({
-      next: () => {
-        this.successMessage = 'Registro exitoso. Ahora puedes iniciar sesión.';
-        setTimeout(() => this.router.navigate(['/login']), 2000);
+      next: (res) => {
+        if (res?.token) {
+          this.storageService.setToken(res.token);
+          this.storageService.setUser(this.username);
+        }
+        this.successMessage = 'Registro exitoso. Redirigiendo...';
+        setTimeout(() => this.router.navigate(['/home']), 1500);
       },
       error: err => {
         this.errorMessage = err.error?.message || 'Error al registrar usuario.';
@@ -44,7 +53,7 @@ export class RegisterComponent {
     });
   }
 
-   togglePassword(): void {
+  togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
 }

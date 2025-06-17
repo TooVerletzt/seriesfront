@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { StorageService } from './storage.service';
+import { JwtResponse } from '../models/auth/JwtResponse';
 
 const AUTH_API = 'http://localhost:8080/api/auth/';
-
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -13,22 +14,18 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private storage: StorageService) {}
 
-  // Registro
   register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(AUTH_API + 'signup', {
-      username,
-      email,
-      password
-    }, httpOptions);
+    return this.http.post(AUTH_API + 'signup', { username, email, password }, httpOptions);
   }
 
-  // Login
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(AUTH_API + 'signin', {
-      username,
-      password
-    }, httpOptions);
+  login(username: string, password: string): Observable<JwtResponse> {
+    return this.http.post<JwtResponse>(AUTH_API + 'signin', { username, password }, httpOptions).pipe(
+      tap(res => {
+        this.storage.setToken(res.accessToken);
+        this.storage.setUser(res.username);
+      })
+    );
   }
 }
