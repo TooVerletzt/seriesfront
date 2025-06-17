@@ -1,0 +1,14 @@
+<div class="flex flex-column align-items-center justify-content-center min-h-screen bg-blue-50 text-center p-5">
+  <h1 class="text-4xl font-bold mb-3 text-blue-900">Bienvenido a <span class="text-primary">MovieBook</span></h1>
+  <p class="text-lg text-blue-600 mb-5">Tu espacio para compartir opiniones sobre películas y series.</p>
+
+  <div class="flex gap-3">
+    <button (click)="goToLogin()" class="p-button p-component p-button-rounded p-button-info px-5 py-2 text-lg shadow-3">
+      Iniciar sesión
+    </button>
+    <button (click)="goToRegister()" class="p-button p-component p-button-rounded p-button-success px-5 py-2 text-lg shadow-3">
+      Registrarse
+    </button>
+  </div>
+</div>
+<app-home></app-home>
