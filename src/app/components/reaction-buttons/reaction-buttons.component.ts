@@ -13,20 +13,30 @@ export class ReactionButtonsComponent {
   constructor(private reactionService: ReactionService) {}
 
   react(reactionId: number) {
-    this.reactionService.reactToTweet(this.tweetId, reactionId).subscribe();
-  }
+  this.reactionService.reactToTweet(this.tweetId, reactionId).subscribe({
+    next: () => {
+      this.refreshReactionCount(); // 🔄 Actualiza solo los contadores
+    },
+    error: err => console.error("Error al reaccionar:", err)
+  });
+}
 
   reactByName(reaction: string) {
     const id = this.getReactionId(reaction);
     this.react(id);
   }
 
-refreshCounts() {
+refreshReactionCount() {
   this.reactionService.getReactionCount(this.tweetId).subscribe({
-    next: data => this.counts = data,
-    error: err => console.error('❌ Error al actualizar conteo:', err)
+    next: (counts) => {
+      this.counts = counts;
+    },
+    error: (err) => {
+      console.error("Error al obtener conteo de reacciones:", err);
+    }
   });
 }
+
   removeReaction() {
     this.reactionService.removeReaction(this.tweetId).subscribe();
   }
