@@ -11,14 +11,10 @@ RUN npm run build -- --configuration production
 FROM node:18
 
 WORKDIR /app
-
-# Copiar build final
-COPY --from=build /app/dist/moviebook/browser /app/dist/moviebook/browser
-COPY server.js /app/server.js
+COPY --from=build /app/dist/moviebook /app/dist/moviebook
+COPY server.js ./
 COPY package*.json ./
-
 RUN npm install --omit=dev
 
 EXPOSE 8080
-
 CMD ["node", "server.js"]

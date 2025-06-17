@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -10,5 +11,5 @@ app.get('*', (req, res) => {
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`🔥 Angular app running on port ${PORT}`);
+  console.log(`🔥 Frontend corriendo en el puerto ${PORT}`);
 });
