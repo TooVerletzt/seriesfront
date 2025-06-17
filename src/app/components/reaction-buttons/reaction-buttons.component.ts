@@ -21,6 +21,12 @@ export class ReactionButtonsComponent {
     this.react(id);
   }
 
+refreshCounts() {
+  this.reactionService.getReactionCount(this.tweetId).subscribe({
+    next: data => this.counts = data,
+    error: err => console.error('❌ Error al actualizar conteo:', err)
+  });
+}
   removeReaction() {
     this.reactionService.removeReaction(this.tweetId).subscribe();
   }
@@ -38,8 +44,8 @@ export class ReactionButtonsComponent {
 
   getReactionId(reaction: string): number {
     const ids: any = {
-      REACTION_LIKE: 1,
-      REACTION_LOVE: 2,
+      REACTION_LIKE: 2,
+      REACTION_LOVE: 1,
       REACTION_HATE: 3,
       REACTION_SAD: 4,
       REACTION_ANGRY: 5
