@@ -9,7 +9,7 @@ import { StorageService } from './storage.service';
 })
 export class TweetService {
 
-  private apiURL = 'http://localhost:8080/api/tweets';
+  private apiURL = 'https://seriesbackspringboot.onrender.com/api/tweets';
 
   constructor(
     private http: HttpClient,

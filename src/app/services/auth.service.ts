@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { StorageService } from './storage.service';
 import { JwtResponse } from '../models/auth/JwtResponse';
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+const AUTH_API = 'https://seriesbackspringboot.onrender.com/api/auth/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };

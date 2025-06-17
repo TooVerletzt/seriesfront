@@ -7,7 +7,7 @@ import { StorageService } from './storage.service';
   providedIn: 'root'
 })
 export class ReactionService {
-  private apiURL = 'http://localhost:8080/api/reactions';
+  private apiURL = 'https://seriesbackspringboot.onrender.com/api/reactions';
 
   constructor(private http: HttpClient, private storageService: StorageService) {}
 

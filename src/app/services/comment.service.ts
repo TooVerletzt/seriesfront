@@ -8,7 +8,7 @@ import { StorageService } from './storage.service';
 })
 export class CommentService {
 
-  private apiURL = 'http://localhost:8080/api/comments';
+  private apiURL = 'https://seriesbackspringboot.onrender.com/api/comments';
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
